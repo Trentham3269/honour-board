@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' rel="stylesheet">
+	<link href="static/css/vuetify.min.css" rel="stylesheet">
+	<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+	<title>Honour Board</title>
+</head>
+<body>
+  <div id="app">
+    <v-app>
+      <v-content>
+        <v-container grid-list-xl>
+          <template fluid>
+            <v-data-table :headers="headers" :items="winners" class="elevation-1" dark>
+              <template slot="items" slot-scope="props">
+                <td>{{ props.item.id }}</td>
+                <td>{{ props.item.title }}</td>
+                <td>{{ props.item.first_name }}</td>
+                <td>{{ props.item.initials }}</td>
+                <td>{{ props.item.last_name }}</td>
+              </template>
+            </v-data-table>
+          </template>
+        </v-container>
+      </v-content>
+    </v-app>
+  </div>
+  <script src="static/js/vue.js"></script>
+  <script src="static/js/axios.min.js"></script>
+  <script src="static/js/vuetify.js"></script>
+  <script src="static/js/app.js"></script>
+</body>
+</html>
