@@ -28,42 +28,26 @@ class Winners(db.Model):
             'last_name': self.last_name,
             'wins': ([w.serialize() for w in self.wins])
         }
-        
-
-class Locations(db.Model):
-    __tablename__ = 'locations'
-    id = db.Column(db.Integer, primary_key=True)
-    location = db.Column(db.String(10))
-    competitions = db.relationship('Competitions', backref='locations', lazy=True)
-
-    def __repr__(self):
-        return 'id: {0}, location: {1}, comps: {2}'.format(self.id, self.location, self.competitions)
-
-    def serialize(self):
-        return {
-            'id': self.id,
-            'location': self.location,
-            'competitions': ([c.serialize() for c in self.competitions])
-        }
 
 
 class Competitions(db.Model):
     __tablename__ = 'competitions'
     id = db.Column(db.Integer, primary_key=True)
     year = db.Column(db.Integer)
-    location_id = db.Column(db.Integer, db.ForeignKey('locations.id'))
+    location = db.Column(db.String(3))
     winner_id = db.Column(db.Integer, db.ForeignKey('winners.id'))
-
+    
     def __repr__(self):
-        return 'id: {0}, year: {1}, location: {2}, winner: {3}'.format(self.id, self.year, self.location_id, self.winner_id)
+        return 'id: {0}, year: {1}, location: {2}, winner: {3}'.format(self.id, self.year, self.location, self.winner_id)
 
     def serialize(self):
         return {
             'id': self.id, 
             'year': self.year,
-            'location': self.location_id,
+            'location': self.location,
             'winner': self.winner_id,
         }
+
 
 @app.route('/')
 def index():
@@ -81,11 +65,10 @@ def winners():
     return jsonify([w.serialize() for w in winners])
 
 
-@app.route('/api/locations')
-def locations():
-    locations = Locations.query.all()
-    print(locations)
-    return jsonify([l.serialize() for l in locations])
+@app.route('/api/winner/<int:id>')
+def winner(id):
+    winner = Winners.query.filter_by(id=id).all()
+    return jsonify([w.serialize() for w in winner])
 
 
 @app.route('/api/competitions')
