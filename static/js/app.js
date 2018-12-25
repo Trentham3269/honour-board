@@ -14,7 +14,7 @@ const app = new Vue({
       this.getWinners();
     },
   data: {
-    headers: [
+    win_headers: [
       { text: 'id', value: 'id' },
       { text: 'Title', value: 'title' },
       { text: 'First Name', value: 'first_name' },
@@ -22,5 +22,6 @@ const app = new Vue({
       { text: 'Last Name', value: 'last_name' }
     ],
     winners: [],
-  }
+    select: ['Winners', 'Competitions'],
+  },
 })

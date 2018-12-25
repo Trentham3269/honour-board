@@ -12,7 +12,10 @@
       <v-content>
         <v-container grid-list-xl>
           <template fluid>
-            <v-data-table :headers="headers" :items="winners" class="elevation-1" dark>
+          	<v-flex xs12 sm6 d-flex>
+        	  <v-select :items="select" label="Choose winners or comps:" dark></v-select>
+      		</v-flex>
+            <v-data-table :headers="win_headers" :items="winners" class="elevation-1" dark>
               <template slot="items" slot-scope="props">
                 <tr @click="props.expanded = !props.expanded">
                   <td>{{ props.item.id }}</td>
