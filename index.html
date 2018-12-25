@@ -14,11 +14,18 @@
           <template fluid>
             <v-data-table :headers="headers" :items="winners" class="elevation-1" dark>
               <template slot="items" slot-scope="props">
-                <td>{{ props.item.id }}</td>
-                <td>{{ props.item.title }}</td>
-                <td>{{ props.item.first_name }}</td>
-                <td>{{ props.item.initials }}</td>
-                <td>{{ props.item.last_name }}</td>
+                <tr @click="props.expanded = !props.expanded">
+                  <td>{{ props.item.id }}</td>
+                  <td>{{ props.item.title }}</td>
+                  <td>{{ props.item.first_name }}</td>
+                  <td>{{ props.item.initials }}</td>
+                  <td>{{ props.item.last_name }}</td>
+                </tr>
+              </template>
+              <template slot="expand" slot-scope="props">
+      		    <v-card flat>
+                  <v-card-text>Placeholder for wins</v-card-text>
+                </v-card>
               </template>
             </v-data-table>
           </template>
